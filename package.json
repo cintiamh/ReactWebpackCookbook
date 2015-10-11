@@ -1,0 +1,24 @@
+{
+  "name": "cookbook",
+  "version": "0.0.1",
+  "description": "https://christianalfoni.github.io/react-webpack-cookbook/",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cintiamh/ReactWebpackCookbook.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cintiamh/ReactWebpackCookbook/issues"
+  },
+  "homepage": "https://github.com/cintiamh/ReactWebpackCookbook#readme",
+  "devDependencies": {
+    "webpack": "^1.12.2",
+    "webpack-dev-server": "^1.12.0"
+  }
+}

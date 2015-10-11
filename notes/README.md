@@ -135,3 +135,86 @@ package.json
 `--content-base build` - Points to the output directory configured
 
 Go to http://localhost:8080 and you should see something.
+
+When webpack-dev-server is running it will watch your files for changes. When it
+happens it rebundles your project and notifies browsers listening to refresh.
+
+webpack.config.js file:
+
+```javascript
+var path = require('path');
+
+module.exports = {
+  entry: [
+    'webpack/hot/dev-server',
+    'webpack-dev-server/client?http://localhost:8080',
+    path.resolve(__dirname, 'app/main.js')
+  ],
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'bundle.js'
+  }
+};
+```
+
+With this the browser will automatically refresh on change.
+
+It's also possible to run the application from http://localhost:8080/webpack-dev-server/bundle
+This will fire up a default index.html file that you do not control. It also
+fires this file up in an iFrame allowing for a status bar to indicate the status
+of the rebundling process.
+
+### Requiring files
+
+#### Modules
+
+Webpack allows you to use different module patterns, but "under the hood" they
+all work the same way. All of them also works straight out of the box.
+
+##### ES6 Modules
+
+```
+import MyModule from './MyModule.js';
+```
+
+##### CommonJS
+
+```
+var MyModule = require('./MyModule.js');
+```
+
+##### AMD
+
+```
+define(['./MyModule.js'], function (MyModule) {
+});
+```
+
+#### Understanding paths
+
+Consider the following file structure:
+
+* /app
+  * /modules
+    * MyModule.js
+  * main.js (entry point)
+  * utils.js
+
+Requiring utils.js file from app/modules/MyModule.js:
+
+```javascript
+// ES6 relative path
+import utils from './../utils.js';
+
+// ES6 absolute path
+import utils from '/utils.js';
+
+// CommonJS relative path
+var utils = require('./../utils.js');
+
+// CommonJS absolute path
+var utils = require('/utils.js');
+```
+
+The relative path is relative to the current file. The absolute path is relative
+to the entry file (main.js).
