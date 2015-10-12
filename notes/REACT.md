@@ -127,7 +127,7 @@ $ npm install react-dom --save
 
 ### Using React JS in the code
 
-component.js
+component.jsx
 
 ```javascript
 import React from 'react';
@@ -181,13 +181,8 @@ webpack.config.js
 
 ```javascript
 var path = require('path');
-
 var config = {
-  entry: [
-    'webpack/hot/dev-server',
-    'webpack-dev-server/client?http://localhost:8080',
-    path.resolve(__dirname, 'app/main.js')
-  ],
+  entry: path.resolve(__dirname, 'app/main.js'),
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js'
@@ -204,3 +199,9 @@ var config = {
 
 module.exports = config;
 ```
+
+## Optimizing rebundling
+
+### Running minified file in development
+
+Instead of making Webpack go through ReactJS and all its dependencies, you can override the behavior in development.
